@@ -17,6 +17,8 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+import com.xceptance.common.util.XltCharBuffer;
+
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
@@ -26,12 +28,17 @@ import org.openjdk.jmh.annotations.Warmup;
 public class ParseNumbersBenchmark
 {
     private Random r = new Random(7L);
-    private static int SIZE = 2000;
+    private static int SIZE = 10000;
     private List<String> longs = new ArrayList<>();
     private List<String> doubles = new ArrayList<>();
+    private List<char[]> doublesChar = new ArrayList<>();
+    private List<XltCharBuffer> doublesXltCharBuffer = new ArrayList<>();
+
     private List<String> ints = new ArrayList<>();
     private List<char[]> longsChar = new ArrayList<>();
     private List<char[]> intsChar = new ArrayList<>();
+    private List<XltCharBuffer> longsXltCharBuffer = new ArrayList<>();
+    private List<XltCharBuffer> intsXltCharBuffer = new ArrayList<>();
     
     private double[] afterDecimals = {0.1, 0.25, 0.5, 0.125, 0.8, 0.9817, 0.34, 0.333, 0.651451, 0.9876543, 0.01, 0.0001, 0.1243, 0.32, 0.8};
 
@@ -46,9 +53,14 @@ public class ParseNumbersBenchmark
             longs.add(lo);
             ints.add(in);
             
-            doubles.add(String.valueOf(r.nextInt(1000) * Math.pow(10, -r.nextInt(3))));
+            final String s = String.valueOf(r.nextInt(1000) + afterDecimals[r.nextInt(afterDecimals.length)]);
+            doubles.add(s);
+            doublesChar.add(s.toCharArray());
+            doublesXltCharBuffer.add(new XltCharBuffer(s.toCharArray()));
             
+            longsXltCharBuffer.add(new XltCharBuffer(lo.toCharArray()));
             longsChar.add(lo.toCharArray());
+            intsXltCharBuffer.add(new XltCharBuffer(in.toCharArray()));
             intsChar.add(in.toCharArray());
         }
     }
@@ -354,25 +366,51 @@ public class ParseNumbersBenchmark
     }
 
     @Benchmark
-    public long long12_like11()
+    public long long12_from6_current_best_charArray()
     {
         long c = 0;
         for (int i = 0; i < longsChar.size(); i++)
         {
-            long l = com.xceptance.common.parsenumbers.tuned12.ParseNumbers.parseLong(longsChar.get(i));
+            long l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbers.parseLong(longsChar.get(i));
             c += l;
         }
         
         return c;
     }
 
+    @Benchmark
+    public long long12_from6_current_best_XltCharBuffer()
+    {
+        long c = 0;
+        for (int i = 0; i < longsChar.size(); i++)
+        {
+            long l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbers.parseLong(longsXltCharBuffer.get(i).toCharArray());
+            c += l;
+        }
+        
+        return c;
+    }
+    
     @Benchmark 
-    public int integer12_like11()
+    public int integer12_from6_current_best_charArray()
     {
         int c = 0;
         for (int i = 0; i < intsChar.size(); i++)
         {
-            int l = com.xceptance.common.parsenumbers.tuned12.ParseNumbers.parseInt(intsChar.get(i));
+            int l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbers.parseInt(intsChar.get(i));
+            c += l;
+        }
+        
+        return c;
+    }
+    
+    @Benchmark 
+    public int integer12_from6_current_best_XltCharBuffer()
+    {
+        int c = 0;
+        for (int i = 0; i < intsChar.size(); i++)
+        {
+            int l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbers.parseInt(intsXltCharBuffer.get(i).toCharArray());
             c += l;
         }
         
@@ -436,12 +474,25 @@ public class ParseNumbersBenchmark
     }
     
     @Benchmark 
-    public double double12_like11()
+    public double double12_from9_current_best_charArray()
     {
         double c = 0;
         for (int i = 0; i < doubles.size(); i++)
         {
-            double l = com.xceptance.common.parsenumbers.tuned12.ParseNumbers.parseDouble(doubles.get(i));
+            double l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbers.parseDouble(doublesChar.get(i));
+            c += l;
+        }
+        
+        return c;
+    }
+    
+    @Benchmark 
+    public double double12_from9_current_best_XltCharBuffer()
+    {
+        double c = 0;
+        for (int i = 0; i < doubles.size(); i++)
+        {
+            double l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbers.parseDouble(doublesXltCharBuffer.get(i).toCharArray());
             c += l;
         }
         

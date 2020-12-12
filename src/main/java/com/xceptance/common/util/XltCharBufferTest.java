@@ -35,6 +35,26 @@ public class XltCharBufferTest
     }
 
     @Test
+    public void toCharArray()
+    {
+        {
+            final char[] src = "Test".toCharArray();
+            final XltCharBuffer b = new XltCharBuffer(src);
+            Assert.assertArrayEquals(src, b.toCharArray());
+        }
+
+        {
+            final char[] src = "TestFoobarRally".toCharArray();
+            final XltCharBuffer b = new XltCharBuffer(src);
+            Assert.assertArrayEquals(src, b.toCharArray());
+            
+            Assert.assertArrayEquals("Test".toCharArray(), b.viewByLength(0, 4).toCharArray());
+            Assert.assertArrayEquals("Foobar".toCharArray(), b.viewByLength(4, 6).toCharArray());
+            Assert.assertArrayEquals("Rally".toCharArray(), b.viewByLength(10, 5).toCharArray());
+        }
+    }
+    
+    @Test
     public void put()
     {
         final char[] src = "Test".toCharArray();

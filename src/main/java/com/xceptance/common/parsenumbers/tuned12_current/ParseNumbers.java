@@ -1,4 +1,4 @@
-package com.xceptance.common.parsenumbers.tuned12;
+package com.xceptance.common.parsenumbers.tuned12_current;
 
 /**
  * This is a small helper class for parsing strings and converting them into longs. This implementation is optimized for
@@ -41,9 +41,20 @@ public final class ParseNumbers
         {
             throw new NumberFormatException("length = 0");
         }
-
-        long value = 0;
-        for (int i = 0; i < length; i++)
+        
+        // that is safe, we already know that we are > 0
+        final int digit = s[0];
+        
+        // turn the compare around to allow the compiler and cpu
+        // to run the next code most of the time
+        if (digit < '0' || digit > '9')
+        {
+            return Long.parseLong(String.valueOf(s));
+        }
+        
+        long value = digit - DIGITOFFSET;
+        
+        for (int i = 1; i < length; i++)
         {
             final int d = s[i];
             if (d < '0' || d > '9')
@@ -51,7 +62,8 @@ public final class ParseNumbers
                 return Long.parseLong(String.valueOf(s));
             }
 
-            value = ((value << 1) + (value << 3)) + (d - DIGITOFFSET);
+            value = ((value << 3) + (value << 1));
+            value += (d - DIGITOFFSET);
         }
 
         return value;
@@ -77,9 +89,25 @@ public final class ParseNumbers
 
         // determine length
         final int length = s.length;
-
-        int value = 0;
-        for (int i = 0; i < length; i++)
+        
+        if (length == 0)
+        {
+            throw new NumberFormatException("length = 0");
+        }
+        
+        // that is safe, we already know that we are > 0
+        final int digit = s[0];
+        
+        // turn the compare around to allow the compiler and cpu
+        // to run the next code most of the time
+        if (digit < '0' || digit > '9')
+        {
+            return Integer.parseInt(String.valueOf(s));
+        }
+        
+        int value = digit - DIGITOFFSET;
+        
+        for (int i = 1; i < length; i++)
         {
             final int d = s[i];
             if (d < '0' || d > '9')
@@ -87,7 +115,8 @@ public final class ParseNumbers
                 return Integer.parseInt(String.valueOf(s));
             }
 
-            value = ((value << 1) + (value << 3)) + (d - DIGITOFFSET);
+            value = ((value << 3) + (value << 1));
+            value += (d - DIGITOFFSET);
         }
 
         return value;
@@ -103,7 +132,7 @@ public final class ParseNumbers
      * @return the converted string as double
      * @throws java.lang.NumberFormatException
      */
-    public static double parseDouble(final String s)
+    public static double parseDouble(final char[] s)
     {
         // no string
         if (s == null)
@@ -112,19 +141,30 @@ public final class ParseNumbers
         }
 
         // determine length
-        final int length = s.length();
+        final int length = s.length;
         
         if (length == 0)
         {
             throw new NumberFormatException("length = 0");
         }
         
-        long value = 0;
+        // that is safe, we already know that we are > 0
+        final int digit = s[0];
+        
+        // turn the compare around to allow the compiler and cpu
+        // to run the next code most of the time
+        if (digit < '0' || digit > '9')
+        {
+            return Double.parseDouble(String.valueOf(s));
+        }
+        
+        long value = digit - DIGITOFFSET;
+        
         int decimalPos = 0;
         
-        for (int i = 0; i < length; i++)
+        for (int i = 1; i < length; i++)
         {
-            final int d = s.charAt(i);
+            final int d = s[i];
             
             if (d == '.')
             {
@@ -134,7 +174,7 @@ public final class ParseNumbers
             
             if (d < '0' || d > '9')
             {
-                return Double.parseDouble(s);
+                return Double.parseDouble(String.valueOf(s));
             }
 
             value = ((value << 3) + (value << 1));
@@ -146,4 +186,5 @@ public final class ParseNumbers
         
         return result;
     }
+
 }
