@@ -26,7 +26,7 @@ import org.openjdk.jmh.annotations.Warmup;
 public class ParseNumbersBenchmark
 {
     private Random r = new Random(7L);
-    private static int SIZE = 1500;
+    private static int SIZE = 2000;
     private List<String> longs = new ArrayList<>();
     private List<String> doubles = new ArrayList<>();
     private List<String> ints = new ArrayList<>();
@@ -54,12 +54,12 @@ public class ParseNumbersBenchmark
     }
     
     @Benchmark
-    public int defaultLong()
+    public long longDefault()
     {
-        int c = 0;
-        for (String s : longs)
+        long c = 0;
+        for (int i = 0; i < longs.size(); i++)
         {
-            long l = Long.parseLong(s);
+            long l = Long.parseLong(longs.get(i));
             c += l;
         }
         
@@ -67,7 +67,7 @@ public class ParseNumbersBenchmark
     }
 
     @Benchmark
-    public int defaultInteger()
+    public int integerDefault()
     {
         int c = 0;
         for (int i = 0; i < ints.size(); i++)
@@ -80,7 +80,7 @@ public class ParseNumbersBenchmark
     }
     
     @Benchmark
-    public double defaultDouble()
+    public double doubleDefault()
     {
         double c = 0;
         for (int i = 0; i < doubles.size(); i++)
@@ -93,9 +93,9 @@ public class ParseNumbersBenchmark
     }
     
     @Benchmark
-    public int customLong()
+    public long long00_Custom()
     {
-        int c = 0;
+        long c = 0;
         for (int i = 0; i < longs.size(); i++)
         {
             long l = com.xceptance.common.parsenumbers.orig.ParseNumbers.parseLong(longs.get(i));
@@ -106,7 +106,7 @@ public class ParseNumbersBenchmark
     }
 
     @Benchmark
-    public int customInteger()
+    public int integer00_Custom()
     {
         int c = 0;
         for (int i = 0; i < ints.size(); i++)
@@ -119,9 +119,9 @@ public class ParseNumbersBenchmark
     }
 
     @Benchmark
-    public int tuned1Long()
+    public long long01()
     {
-        int c = 0;
+        long c = 0;
         for (int i = 0; i < longs.size(); i++)
         {
             long l = com.xceptance.common.parsenumbers.tuned1.ParseNumbers.parseLong(longs.get(i));
@@ -132,7 +132,7 @@ public class ParseNumbersBenchmark
     }
 
     @Benchmark
-    public int tuned1Integer()
+    public int integer01()
     {
         int c = 0;
         for (int i = 0; i < ints.size(); i++)
@@ -145,9 +145,9 @@ public class ParseNumbersBenchmark
     }
 
     @Benchmark
-    public int tuned2Long()
+    public long long02()
     {
-        int c = 0;
+        long c = 0;
         for (int i = 0; i < longs.size(); i++)
         {
             long l = com.xceptance.common.parsenumbers.tuned2.ParseNumbers.parseLong(longs.get(i));
@@ -158,7 +158,7 @@ public class ParseNumbersBenchmark
     }
 
     @Benchmark
-    public int tuned2Integer()
+    public int integer02()
     {
         int c = 0;
         for (int i = 0; i < ints.size(); i++)
@@ -171,9 +171,9 @@ public class ParseNumbersBenchmark
     }
    
     @Benchmark
-    public int tuned3Long()
+    public long long03()
     {
-        int c = 0;
+        long c = 0;
         for (int i = 0; i < longs.size(); i++)
         {
             long l = com.xceptance.common.parsenumbers.tuned3.ParseNumbers.parseLong(longs.get(i));
@@ -184,7 +184,7 @@ public class ParseNumbersBenchmark
     }
 
     @Benchmark 
-    public int tuned3Integer()
+    public int integer03()
     {
         int c = 0;
         for (int i = 0; i < ints.size(); i++)
@@ -197,9 +197,9 @@ public class ParseNumbersBenchmark
     }
     
     @Benchmark
-    public int tuned4Long()
+    public long long04()
     {
-        int c = 0;
+        long c = 0;
         for (int i = 0; i < longs.size(); i++)
         {
             long l = com.xceptance.common.parsenumbers.tuned4.ParseNumbers.parseLong(longs.get(i));
@@ -210,7 +210,7 @@ public class ParseNumbersBenchmark
     }
 
     @Benchmark 
-    public int tuned4Integer()
+    public int integer04()
     {
         int c = 0;
         for (int i = 0; i < ints.size(); i++)
@@ -223,9 +223,9 @@ public class ParseNumbersBenchmark
     }
 
     @Benchmark
-    public int tuned5Long_char_nochecks_shortloop()
+    public long long05_char_nochecks_shortloop()
     {
-        int c = 0;
+        long c = 0;
         for (int i = 0; i < longsChar.size(); i++)
         {
             long l = com.xceptance.common.parsenumbers.tuned5_fail.ParseNumbers.parseLong(longsChar.get(i));
@@ -236,7 +236,7 @@ public class ParseNumbersBenchmark
     }
 
     @Benchmark 
-    public int tuned5Integer_char_nochecks_shortloop()
+    public int integer05_char_nochecks_shortloop()
     {
         int c = 0;
         for (int i = 0; i < intsChar.size(); i++)
@@ -249,9 +249,9 @@ public class ParseNumbersBenchmark
     }
     
     @Benchmark
-    public int tuned6Long_char()
+    public long long06_char()
     {
-        int c = 0;
+        long c = 0;
         for (int i = 0; i < longsChar.size(); i++)
         {
             long l = com.xceptance.common.parsenumbers.tuned6_fail.ParseNumbers.parseLong(longsChar.get(i));
@@ -262,7 +262,7 @@ public class ParseNumbersBenchmark
     }
 
     @Benchmark 
-    public int tuned6Integer_char()
+    public int integer06_char()
     {
         int c = 0;
         for (int i = 0; i < intsChar.size(); i++)
@@ -275,9 +275,9 @@ public class ParseNumbersBenchmark
     }
     
     @Benchmark
-    public int tuned7Long_char_nochecks_longloop()
+    public long long07char_nochecks_longloop()
     {
-        int c = 0;
+        long c = 0;
         for (int i = 0; i < longsChar.size(); i++)
         {
             long l = com.xceptance.common.parsenumbers.tuned7_fail.FastParseNumbers.fastParseLong(longsChar.get(i));
@@ -288,7 +288,7 @@ public class ParseNumbersBenchmark
     }
 
     @Benchmark 
-    public int tuned7Integer_char_nochecks_longloop()
+    public int integer07_char_nochecks_longloop()
     {
         int c = 0;
         for (int i = 0; i < intsChar.size(); i++)
@@ -300,9 +300,91 @@ public class ParseNumbersBenchmark
         return c;
     }
     
+    @Benchmark
+    public long long10_char_longloop()
+    {
+        long c = 0;
+        for (int i = 0; i < longsChar.size(); i++)
+        {
+            long l = com.xceptance.common.parsenumbers.tuned10.ParseNumbers.parseLong(longsChar.get(i));
+            c += l;
+        }
+        
+        return c;
+    }
 
     @Benchmark 
-    public double tuned8Double()
+    public int integer10_char_longloop()
+    {
+        int c = 0;
+        for (int i = 0; i < intsChar.size(); i++)
+        {
+            int l = com.xceptance.common.parsenumbers.tuned10.ParseNumbers.parseInt(intsChar.get(i));
+            c += l;
+        }
+        
+        return c;
+    }
+    
+    
+    @Benchmark
+    public long long11_char_longloop_onelinecalc()
+    {
+        long c = 0;
+        for (int i = 0; i < longsChar.size(); i++)
+        {
+            long l = com.xceptance.common.parsenumbers.tuned11.ParseNumbers.parseLong(longsChar.get(i));
+            c += l;
+        }
+        
+        return c;
+    }
+
+    @Benchmark 
+    public int integer11_char_longloop_onelinecalc()
+    {
+        int c = 0;
+        for (int i = 0; i < intsChar.size(); i++)
+        {
+            int l = com.xceptance.common.parsenumbers.tuned11.ParseNumbers.parseInt(intsChar.get(i));
+            c += l;
+        }
+        
+        return c;
+    }
+
+    @Benchmark
+    public long long12_like11()
+    {
+        long c = 0;
+        for (int i = 0; i < longsChar.size(); i++)
+        {
+            long l = com.xceptance.common.parsenumbers.tuned12.ParseNumbers.parseLong(longsChar.get(i));
+            c += l;
+        }
+        
+        return c;
+    }
+
+    @Benchmark 
+    public int integer12_like11()
+    {
+        int c = 0;
+        for (int i = 0; i < intsChar.size(); i++)
+        {
+            int l = com.xceptance.common.parsenumbers.tuned12.ParseNumbers.parseInt(intsChar.get(i));
+            c += l;
+        }
+        
+        return c;
+    }
+    
+    /* ==================================================================
+     * Double
+     */
+    
+    @Benchmark 
+    public double double08()
     {
         double c = 0;
         for (int i = 0; i < doubles.size(); i++)
@@ -315,12 +397,51 @@ public class ParseNumbersBenchmark
     }
 
     @Benchmark 
-    public double tuned9DoubleMultiplierList()
+    public double double09_MultiplierList()
     {
         double c = 0;
         for (int i = 0; i < doubles.size(); i++)
         {
             double l = com.xceptance.common.parsenumbers.tuned9_double.ParseNumbers.parseDouble(doubles.get(i));
+            c += l;
+        }
+        
+        return c;
+    }
+    
+    @Benchmark 
+    public double double10_MultiplierList_longLoop()
+    {
+        double c = 0;
+        for (int i = 0; i < doubles.size(); i++)
+        {
+            double l = com.xceptance.common.parsenumbers.tuned10.ParseNumbers.parseDouble(doubles.get(i));
+            c += l;
+        }
+        
+        return c;
+    }
+
+    @Benchmark 
+    public double double11()
+    {
+        double c = 0;
+        for (int i = 0; i < doubles.size(); i++)
+        {
+            double l = com.xceptance.common.parsenumbers.tuned11.ParseNumbers.parseDouble(doubles.get(i));
+            c += l;
+        }
+        
+        return c;
+    }
+    
+    @Benchmark 
+    public double double12_like11()
+    {
+        double c = 0;
+        for (int i = 0; i < doubles.size(); i++)
+        {
+            double l = com.xceptance.common.parsenumbers.tuned12.ParseNumbers.parseDouble(doubles.get(i));
             c += l;
         }
         

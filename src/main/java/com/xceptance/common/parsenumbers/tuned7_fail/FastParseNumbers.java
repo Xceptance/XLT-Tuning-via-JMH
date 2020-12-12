@@ -25,27 +25,11 @@ public final class FastParseNumbers
      */
     public static long fastParseLong(final char[] s)
     {
-        try
-        {
-            return _fastParseLong(s);
-        }
-        catch(Exception e)
-        {
-            throw new NumberFormatException(e.getMessage());
-        }
-    }
-        
-    private static long _fastParseLong(final char[] s)
-    {
         // determine length
         final int length = s.length;
         
-        // that is safe, we already know that we are > 0
-        final int digit = s[0];
-        
-        long value = digit - DIGITOFFSET;
-        
-        for (int i = 1; i < length; i++)
+        long value = 0;
+        for (int i = 0; i < length; i++)
         {
             final int d = s[i];
 
@@ -70,26 +54,11 @@ public final class FastParseNumbers
      */
     public static int fastParseInt(final char[] s)
     {
-        try
-        {
-            return _fastParseInt(s);
-        }
-        catch(Exception e)
-        {
-            throw new NumberFormatException(e.getMessage());
-        }
-    }
-    
-    private static int _fastParseInt(final char[] s)
-    {
         // determine length
         final int length = s.length;
-        
-        // that is safe, we already know that we are > 0
-        final int digit = s[0];
-        int value = digit - DIGITOFFSET;
-        
-        for (int i = 1; i < length; i++)
+
+        int value = 0;
+        for (int i = 0; i < length; i++)
         {
             final int d = s[i];
 
