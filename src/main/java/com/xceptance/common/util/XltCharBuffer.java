@@ -1,7 +1,5 @@
 package com.xceptance.common.util;
 
-import java.util.Arrays;
-
 /**
  * This class does not implement the CharBuffer of the JDK, but uses the idea of a shared
  * character array with views. This is also a very unsafe implementation with as little
@@ -13,7 +11,6 @@ import java.util.Arrays;
 public class XltCharBuffer
 {
     private static final XltCharBuffer EMPTY = new XltCharBuffer(null);
-    private static final String EMPTY_STRING = "";
     
     private final char[] src;
     private final int from;
@@ -21,14 +18,14 @@ public class XltCharBuffer
     
     public XltCharBuffer(final char[] src)
     {
-        this.src = src;
+        this.src = src == null ? new char[0] : src;
         this.from = 0;
-        this.length = src != null ? src.length : 0;
+        this.length = this.src.length;
     }
     
     XltCharBuffer(final char[] src, final int from, final int length)
     {
-        this.src = src;
+        this.src = src == null ? new char[0] : src;
         this.from = from;
         this.length = length;
     }
@@ -73,12 +70,16 @@ public class XltCharBuffer
     @Override
     public String toString()
     {
-        return src == null ? EMPTY_STRING : String.valueOf(src, from, length);
+        return String.valueOf(src, from, length);
     }
 
     public char[] toCharArray()
     {
-        return src == null ? new char[0] : Arrays.copyOfRange(src, from, from + length);
+        final char[] target = new char[length];
+        
+        System.arraycopy(src, from, target, 0, length);
+        
+        return target;
     }
     
     public int length()
