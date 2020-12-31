@@ -66,6 +66,16 @@ public class XltCharBuffer
     {
         return EMPTY;
     }
+
+    public static XltCharBuffer valueOf(final String s)
+    {
+        return new XltCharBuffer(s.toCharArray());
+    }
+
+    public static XltCharBuffer valueOf(final char[] s)
+    {
+        return new XltCharBuffer(s);
+    }
     
     @Override
     public String toString()

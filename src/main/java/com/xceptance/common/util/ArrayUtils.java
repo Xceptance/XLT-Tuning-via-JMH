@@ -1,5 +1,7 @@
 package com.xceptance.common.util;
 
+import it.unimi.dsi.util.FastRandom;
+
 public class ArrayUtils
 {
     // Generic function to randomize a list in Java using Fisher–Yates shuffle

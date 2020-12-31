@@ -3,8 +3,9 @@ package com.xceptance.map;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.xceptance.common.util.FastRandom;
 import com.xceptance.common.util.RandomUtils;
+
+import it.unimi.dsi.util.FastRandom;
 
 
 

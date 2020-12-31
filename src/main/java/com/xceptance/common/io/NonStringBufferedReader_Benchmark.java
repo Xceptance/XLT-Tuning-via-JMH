@@ -42,7 +42,7 @@ public class NonStringBufferedReader_Benchmark
 //        in = this.getClass().getClassLoader().getResourceAsStream("com/xceptance/common/io/big10k.txt");
         try
         {
-            in = new FileInputStream("/tmp/big10k.txt");
+            in = new FileInputStream("/home/rschwietzke/projects/loadtest/mc-traderepublic/results/20201221-194458-exchange-switching-4h/ac009_europe-west3-a_00/TTicker/114/timers.csv");
         }
         catch (FileNotFoundException e)
         {

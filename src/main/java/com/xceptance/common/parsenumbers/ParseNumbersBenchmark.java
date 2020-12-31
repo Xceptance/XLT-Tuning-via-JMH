@@ -28,7 +28,7 @@ import com.xceptance.common.util.XltCharBuffer;
 public class ParseNumbersBenchmark
 {
     private Random r = new Random(7L);
-    private static int SIZE = 10000;
+    private static int SIZE = 1000;
     private List<String> longs = new ArrayList<>();
     private List<String> doubles = new ArrayList<>();
     private List<char[]> doublesChar = new ArrayList<>();
@@ -384,7 +384,7 @@ public class ParseNumbersBenchmark
         long c = 0;
         for (int i = 0; i < longsChar.size(); i++)
         {
-            long l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbers.parseLong(longsXltCharBuffer.get(i).toCharArray());
+            long l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbersXltCharBuffer.parseLong(longsXltCharBuffer.get(i));
             c += l;
         }
         
@@ -424,7 +424,7 @@ public class ParseNumbersBenchmark
         int c = 0;
         for (int i = 0; i < intsChar.size(); i++)
         {
-            int l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbers.parseInt(intsXltCharBuffer.get(i).toCharArray());
+            int l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbersXltCharBuffer.parseInt(intsXltCharBuffer.get(i));
             c += l;
         }
         
@@ -519,7 +519,7 @@ public class ParseNumbersBenchmark
         double c = 0;
         for (int i = 0; i < doubles.size(); i++)
         {
-            double l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbers.parseDouble(doublesXltCharBuffer.get(i).toCharArray());
+            double l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbersXltCharBuffer.parseDouble(doublesXltCharBuffer.get(i));
             c += l;
         }
         

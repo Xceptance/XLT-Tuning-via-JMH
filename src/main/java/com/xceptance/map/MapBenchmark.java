@@ -16,8 +16,9 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
-import com.xceptance.common.util.FastRandom;
 import com.xceptance.common.util.RandomUtils;
+
+import it.unimi.dsi.util.FastRandom;
 
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)

@@ -1,5 +1,7 @@
 package com.xceptance.common.util;
 
+import it.unimi.dsi.util.FastRandom;
+
 public class RandomUtils
 {
     private final static String LOWERCHARS = "abcdefghijklmnopqrstuvwxyz";
