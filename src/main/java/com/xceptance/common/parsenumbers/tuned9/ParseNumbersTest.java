@@ -1,4 +1,4 @@
-package com.xceptance.common.parsenumbers.tuned9_double;
+package com.xceptance.common.parsenumbers.tuned9;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -22,8 +22,8 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+import com.xceptance.common.lang.OpenStringBuilder;
 import com.xceptance.common.util.SimpleArrayList;
-import com.xceptance.lang.OpenStringBuilder;
 
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)

@@ -1,4 +1,4 @@
-package com.xceptance.common.parsenumbers.tuned9_double;
+package com.xceptance.common.parsenumbers.tuned12_current_charsequence;
 
 /**
  * This is a small helper class for parsing strings and converting them into longs. This implementation is optimized for
@@ -7,9 +7,10 @@ package com.xceptance.common.parsenumbers.tuned9_double;
  * 
  * @author René Schwietzke
  */
-public final class ParseNumbers
+public final class ParseNumbersCharSequence
 {
     private static final int DIGITOFFSET = 48;
+    
     private static final double[] multipliers = {
             1, 1, 0.1, 0.01, 0.001, 0.000_1, 0.000_01, 0.000_001, 0.000_000_1, 0.000_000_01, 
             0.000_000_001, 0.000_000_000_1, 0.000_000_000_01, 0.000_000_000_001, 0.000_000_000_000_1,
@@ -22,17 +23,11 @@ public final class ParseNumbers
      * 
      * @param s
      *            the string to parse
-     * @return the converted string as double
+     * @return the converted string as int
      * @throws java.lang.NumberFormatException
      */
-    public static long parseLong(final String s)
+    public static long parseLong(final CharSequence s)
     {
-        // no string
-        if (s == null)
-        {
-            throw new NumberFormatException("null");
-        }
-
         // determine length
         final int length = s.length();
         
@@ -48,7 +43,7 @@ public final class ParseNumbers
         // to run the next code most of the time
         if (digit < '0' || digit > '9')
         {
-            return Long.parseLong(s);
+            return Long.parseLong(String.valueOf(s));
         }
         
         long value = digit - DIGITOFFSET;
@@ -58,7 +53,7 @@ public final class ParseNumbers
             final int d = s.charAt(i);
             if (d < '0' || d > '9')
             {
-                return Long.parseLong(s);
+                return Long.parseLong(String.valueOf(s));
             }
 
             value = ((value << 3) + (value << 1));
@@ -78,14 +73,8 @@ public final class ParseNumbers
      * @return the converted string as int
      * @throws java.lang.NumberFormatException
      */
-    public static int parseInt(final String s)
+    public static int parseInt(final CharSequence s)
     {
-        // no string
-        if (s == null)
-        {
-            throw new NumberFormatException("null");
-        }
-
         // determine length
         final int length = s.length();
         
@@ -101,7 +90,7 @@ public final class ParseNumbers
         // to run the next code most of the time
         if (digit < '0' || digit > '9')
         {
-            return Integer.parseInt(s);
+            return Integer.parseInt(String.valueOf(s));
         }
         
         int value = digit - DIGITOFFSET;
@@ -111,7 +100,7 @@ public final class ParseNumbers
             final int d = s.charAt(i);
             if (d < '0' || d > '9')
             {
-                return Integer.parseInt(s);
+                return Integer.parseInt(String.valueOf(s));
             }
 
             value = ((value << 3) + (value << 1));
@@ -131,14 +120,8 @@ public final class ParseNumbers
      * @return the converted string as double
      * @throws java.lang.NumberFormatException
      */
-    public static double parseDouble(final String s)
+    public static double parseDouble(final CharSequence s)
     {
-        // no string
-        if (s == null)
-        {
-            throw new NumberFormatException("null");
-        }
-
         // determine length
         final int length = s.length();
         
@@ -154,7 +137,7 @@ public final class ParseNumbers
         // to run the next code most of the time
         if (digit < '0' || digit > '9')
         {
-            return Double.parseDouble(s);
+            return Double.parseDouble(String.valueOf(s));
         }
         
         long value = digit - DIGITOFFSET;
@@ -173,7 +156,7 @@ public final class ParseNumbers
             
             if (d < '0' || d > '9')
             {
-                return Double.parseDouble(s);
+                return Double.parseDouble(String.valueOf(s));
             }
 
             value = ((value << 3) + (value << 1));
@@ -185,4 +168,5 @@ public final class ParseNumbers
         
         return result;
     }
+
 }

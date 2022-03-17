@@ -1,4 +1,4 @@
-package com.xceptance.common.csvutils.tuned512_labels;
+package com.xceptance.common.csvutils.tuned514a;
 
 import java.text.ParseException;
 import java.util.List;
@@ -9,6 +9,8 @@ import com.xceptance.common.util.XltCharBuffer;
 /**
  * The {@link CsvUtilsDecode} class provides helper methods to encode and decode values to/from the CSV format. Note that we
  * define the "C" in "CSV" to stand for "comma", so other characters are not allowed as field separator.
+ * 
+ * v514
  */
 public final class CsvUtilsDecode
 {
@@ -48,7 +50,7 @@ public final class CsvUtilsDecode
      */
     public static List<XltCharBuffer> parse(final String s)
     {
-        return parse(s.toCharArray(), COMMA);
+        return parse(XltCharBuffer.valueOf(s), COMMA);
     }
 
     private static final int NONE = 0;
@@ -58,6 +60,7 @@ public final class CsvUtilsDecode
     private static final int LAST_WAS_SEPARATOR = 8;
     private static final int JUST_LEFT_QUOTES = 16;    
     private static final int COPY_REST = 32;    
+    
     /**
      * Encodes the given fields to a CSV-encoded data record using the given field separator.
      * 
@@ -68,10 +71,9 @@ public final class CsvUtilsDecode
      * @return the CSV-encoded data record
      * @throws ParseException 
      */
-    public static List<XltCharBuffer> parse(final char[] _src, final char fieldSeparator)
+    public static List<XltCharBuffer> parse(final XltCharBuffer src, final char fieldSeparator)
     {
-        final SimpleArrayList<XltCharBuffer> result = new SimpleArrayList<>(30);
-        final XltCharBuffer src = new XltCharBuffer(_src);
+        final SimpleArrayList<XltCharBuffer> result = new SimpleArrayList<>(32);
         
         final int size = src.length();
 

@@ -1,6 +1,4 @@
-package com.xceptance.common.parsenumbers.tuned12_current;
-
-import com.xceptance.common.util.XltCharBuffer;
+package com.xceptance.common.parsenumbers.tuned9;
 
 /**
  * This is a small helper class for parsing strings and converting them into longs. This implementation is optimized for
@@ -9,10 +7,9 @@ import com.xceptance.common.util.XltCharBuffer;
  * 
  * @author René Schwietzke
  */
-public final class ParseNumbersXltCharBuffer
+public final class ParseNumbers
 {
     private static final int DIGITOFFSET = 48;
-    
     private static final double[] multipliers = {
             1, 1, 0.1, 0.01, 0.001, 0.000_1, 0.000_01, 0.000_001, 0.000_000_1, 0.000_000_01, 
             0.000_000_001, 0.000_000_000_1, 0.000_000_000_01, 0.000_000_000_001, 0.000_000_000_000_1,
@@ -25,11 +22,17 @@ public final class ParseNumbersXltCharBuffer
      * 
      * @param s
      *            the string to parse
-     * @return the converted string as int
+     * @return the converted string as double
      * @throws java.lang.NumberFormatException
      */
-    public static long parseLong(final XltCharBuffer s)
+    public static long parseLong(final String s)
     {
+        // no string
+        if (s == null)
+        {
+            throw new NumberFormatException("null");
+        }
+
         // determine length
         final int length = s.length();
         
@@ -45,7 +48,7 @@ public final class ParseNumbersXltCharBuffer
         // to run the next code most of the time
         if (digit < '0' || digit > '9')
         {
-            return Long.parseLong(String.valueOf(s));
+            return Long.parseLong(s);
         }
         
         long value = digit - DIGITOFFSET;
@@ -55,7 +58,7 @@ public final class ParseNumbersXltCharBuffer
             final int d = s.charAt(i);
             if (d < '0' || d > '9')
             {
-                return Long.parseLong(String.valueOf(s));
+                return Long.parseLong(s);
             }
 
             value = ((value << 3) + (value << 1));
@@ -75,8 +78,14 @@ public final class ParseNumbersXltCharBuffer
      * @return the converted string as int
      * @throws java.lang.NumberFormatException
      */
-    public static int parseInt(final XltCharBuffer s)
+    public static int parseInt(final String s)
     {
+        // no string
+        if (s == null)
+        {
+            throw new NumberFormatException("null");
+        }
+
         // determine length
         final int length = s.length();
         
@@ -92,7 +101,7 @@ public final class ParseNumbersXltCharBuffer
         // to run the next code most of the time
         if (digit < '0' || digit > '9')
         {
-            return Integer.parseInt(String.valueOf(s));
+            return Integer.parseInt(s);
         }
         
         int value = digit - DIGITOFFSET;
@@ -102,7 +111,7 @@ public final class ParseNumbersXltCharBuffer
             final int d = s.charAt(i);
             if (d < '0' || d > '9')
             {
-                return Integer.parseInt(String.valueOf(s));
+                return Integer.parseInt(s);
             }
 
             value = ((value << 3) + (value << 1));
@@ -122,8 +131,14 @@ public final class ParseNumbersXltCharBuffer
      * @return the converted string as double
      * @throws java.lang.NumberFormatException
      */
-    public static double parseDouble(final XltCharBuffer s)
+    public static double parseDouble(final String s)
     {
+        // no string
+        if (s == null)
+        {
+            throw new NumberFormatException("null");
+        }
+
         // determine length
         final int length = s.length();
         
@@ -139,7 +154,7 @@ public final class ParseNumbersXltCharBuffer
         // to run the next code most of the time
         if (digit < '0' || digit > '9')
         {
-            return Double.parseDouble(String.valueOf(s));
+            return Double.parseDouble(s);
         }
         
         long value = digit - DIGITOFFSET;
@@ -158,7 +173,7 @@ public final class ParseNumbersXltCharBuffer
             
             if (d < '0' || d > '9')
             {
-                return Double.parseDouble(String.valueOf(s));
+                return Double.parseDouble(s);
             }
 
             value = ((value << 3) + (value << 1));
@@ -170,5 +185,4 @@ public final class ParseNumbersXltCharBuffer
         
         return result;
     }
-
 }

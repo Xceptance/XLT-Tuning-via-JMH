@@ -1,4 +1,4 @@
-package com.xceptance.common.parsenumbers.tuned12_current;
+package com.xceptance.common.parsenumbers.tuned12_current_charsequence;
 
 import com.xceptance.common.util.XltCharBuffer;
 

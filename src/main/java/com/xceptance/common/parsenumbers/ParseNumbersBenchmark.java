@@ -287,32 +287,6 @@ public class ParseNumbersBenchmark
     }
     
     @Benchmark
-    public long long07char_nochecks_longloop()
-    {
-        long c = 0;
-        for (int i = 0; i < longsChar.size(); i++)
-        {
-            long l = com.xceptance.common.parsenumbers.tuned7_fail.FastParseNumbers.fastParseLong(longsChar.get(i));
-            c += l;
-        }
-        
-        return c;
-    }
-
-    @Benchmark 
-    public int integer07_char_nochecks_longloop()
-    {
-        int c = 0;
-        for (int i = 0; i < intsChar.size(); i++)
-        {
-            int l = com.xceptance.common.parsenumbers.tuned7_fail.FastParseNumbers.fastParseInt(intsChar.get(i));
-            c += l;
-        }
-        
-        return c;
-    }
-    
-    @Benchmark
     public long long10_char_longloop()
     {
         long c = 0;
@@ -378,18 +352,18 @@ public class ParseNumbersBenchmark
         return c;
     }
 
-    @Benchmark
-    public long long12_from6_current_best_XltCharBuffer()
-    {
-        long c = 0;
-        for (int i = 0; i < longsChar.size(); i++)
-        {
-            long l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbersXltCharBuffer.parseLong(longsXltCharBuffer.get(i));
-            c += l;
-        }
-        
-        return c;
-    }
+//    @Benchmark
+//    public long long12_from6_current_best_XltCharBuffer()
+//    {
+//        long c = 0;
+//        for (int i = 0; i < longsChar.size(); i++)
+//        {
+//            long l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbersXltCharBuffer.parseLong(longsXltCharBuffer.get(i));
+//            c += l;
+//        }
+//        
+//        return c;
+//    }
 
     
     @Benchmark
@@ -418,18 +392,18 @@ public class ParseNumbersBenchmark
         return c;
     }
     
-    @Benchmark 
-    public int integer12_from6_current_best_XltCharBuffer()
-    {
-        int c = 0;
-        for (int i = 0; i < intsChar.size(); i++)
-        {
-            int l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbersXltCharBuffer.parseInt(intsXltCharBuffer.get(i));
-            c += l;
-        }
-        
-        return c;
-    }
+//    @Benchmark 
+//    public int integer12_from6_current_best_XltCharBuffer()
+//    {
+//        int c = 0;
+//        for (int i = 0; i < intsChar.size(); i++)
+//        {
+//            int l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbersXltCharBuffer.parseInt(intsXltCharBuffer.get(i));
+//            c += l;
+//        }
+//        
+//        return c;
+//    }
 
     @Benchmark 
     public int integer12_from6_current_best_StringToCharArrray()
@@ -467,7 +441,7 @@ public class ParseNumbersBenchmark
         double c = 0;
         for (int i = 0; i < doubles.size(); i++)
         {
-            double l = com.xceptance.common.parsenumbers.tuned9_double.ParseNumbers.parseDouble(doubles.get(i));
+            double l = com.xceptance.common.parsenumbers.tuned9.ParseNumbers.parseDouble(doubles.get(i));
             c += l;
         }
         
@@ -513,18 +487,18 @@ public class ParseNumbersBenchmark
         return c;
     }
     
-    @Benchmark 
-    public double double12_from9_current_best_XltCharBuffer()
-    {
-        double c = 0;
-        for (int i = 0; i < doubles.size(); i++)
-        {
-            double l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbersXltCharBuffer.parseDouble(doublesXltCharBuffer.get(i));
-            c += l;
-        }
-        
-        return c;
-    }
+//    @Benchmark 
+//    public double double12_from9_current_best_XltCharBuffer()
+//    {
+//        double c = 0;
+//        for (int i = 0; i < doubles.size(); i++)
+//        {
+//            double l = com.xceptance.common.parsenumbers.tuned12_current.ParseNumbersXltCharBuffer.parseDouble(doublesXltCharBuffer.get(i));
+//            c += l;
+//        }
+//        
+//        return c;
+//    }
     
     @Benchmark 
     public double double12_from9_current_best_StringToCharArray()

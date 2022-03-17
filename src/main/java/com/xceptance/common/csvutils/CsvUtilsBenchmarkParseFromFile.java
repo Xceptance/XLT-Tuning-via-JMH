@@ -22,9 +22,9 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
+import com.xceptance.common.lang.OpenStringBuilder;
 import com.xceptance.common.util.SimpleArrayList;
 import com.xceptance.common.util.XltCharBuffer;
-import com.xceptance.lang.OpenStringBuilder;
 
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)

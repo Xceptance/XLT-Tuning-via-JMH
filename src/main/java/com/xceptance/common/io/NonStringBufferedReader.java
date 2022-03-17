@@ -3,7 +3,7 @@ package com.xceptance.common.io;
 import java.io.IOException;
 import java.io.Reader;
 
-import com.xceptance.lang.OpenStringBuilder;
+import com.xceptance.common.lang.OpenStringBuilder;
 
 /**
  * Trying to be a very fast buffered reader with minimal functionality

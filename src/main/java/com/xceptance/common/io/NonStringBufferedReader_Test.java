@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.xceptance.lang.OpenStringBuilder;
+import com.xceptance.common.lang.OpenStringBuilder;
 
 
 public class NonStringBufferedReader_Test
